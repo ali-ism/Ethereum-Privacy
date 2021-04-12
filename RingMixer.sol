@@ -3,6 +3,11 @@
 //https://github.com/solidblu1992/ethereum/blob/master/SimpleRingMixer/contracts/RingMixerV2.sol
 //Licensed under the GPL-3.0 License .
 //-------------------------------------------------------
+//-------------------------------------------------------
+//This code is (modified) from
+//https://github.com/solidblu1992/ethereum/blob/master/SimpleRingMixer/contracts/RingMixerV2.sol
+//Licensed under the GPL-3.0 License .
+//-------------------------------------------------------
 pragma solidity ^0.5.9;
 
 contract RingMixerV2 {
@@ -350,7 +355,9 @@ contract RingMixerV2 {
         s = addmod(alpha, s, N);        
     }
     
-
+    //Provides a ring signature
+    //data = nonce?, one time private key, 
+    //signature = keyimage, startng ring segment, 
     function RingSign(RingMessage memory message, uint256[] memory data) internal view returns (uint256[32] memory signature)
     {
         //Check Array Lengths
