@@ -1,7 +1,5 @@
 # Ethereum-Privacy
 
-EECE 798I Project
-
 ## RingMixer
 
 This solution implements an Ethereum smart contract which enables the transaction of ETH without revealing the sender by using ring signatures. All transactions are done by calling functions of the contract and the transfer of tokens in done internally. Theis contract provides the following transaction functionalities:
