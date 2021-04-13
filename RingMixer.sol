@@ -356,8 +356,8 @@ contract RingMixerV2 {
     }
     
     //Provides a ring signature
-    //data = nonce?, one time private key, 
-    //signature = keyimage, startng ring segment, 
+    //data = index of the true pubkey, one time private key, [random number for each public key], [public keys]
+    //signature = keyimage, starting ring segment (c), [random number for each public key], [public keys]
     function RingSign(RingMessage memory message, uint256[] memory data) internal view returns (uint256[32] memory signature)
     {
         //Check Array Lengths
@@ -377,16 +377,21 @@ contract RingMixerV2 {
         uint256[2] memory keyimage;
         uint256 c;
         
+        //Temporary Variables
+        uint256 pkey_s = data[2+ring_size+data[0]] //true pubkey
+        uint256 skey = data[1] //true private key
+        uint256 x_s = data[2+data[0]] //random number corresponding to true pubkey
+        
         //Setup Indices
         i = (data[0] + 1) % ring_size;
         
         //Calculate Key Image
-        pubkey = ExpandPoint(data[2+ring_size+data[0]]);
-        keyimage = KeyImage(data[1], pubkey);
+        pubkey = ExpandPoint(pkey_s);
+        keyimage = KeyImage(skey, pubkey);
         signature[0] = CompressPoint(keyimage);
         
         //Calculate Starting c = hash( message, alpha*G1, alpha*HashPoint(Pk) )
-        c = RingStartingSegment(message, data[2+data[0]], pubkey);
+        c = RingStartingSegment(message, x_s, pubkey);
         if (i == 0) {
             signature[1] = c;
         }
@@ -409,7 +414,7 @@ contract RingMixerV2 {
         
         //Calculate s s.t. alpha*G1 = c1*P1 + s1*G1 = (c1*x1 + s1) * G1
         //s = alpha - c1*x1
-        signature[2+data[0]] = SubMul(data[2+data[0]], c, data[1]);
+        signature[2+data[0]] = SubMul(x_s, c, skey);
     }
     
     function RingSign_User(address[] memory destination, uint256[] memory value, uint256[] memory data) public view returns (uint256[32] memory signature)
