@@ -378,9 +378,9 @@ contract RingMixerV2 {
         uint256 c;
         
         //Temporary Variables
-        uint256 pkey_s = data[2+ring_size+data[0]] //true pubkey
-        uint256 skey = data[1] //true private key
-        uint256 x_s = data[2+data[0]] //random number corresponding to true pubkey
+        uint256 pkey_s = data[2+ring_size+data[0]]; //true pubkey
+        uint256 skey = data[1]; //true private key
+        uint256 x_s = data[2+data[0]]; //random number corresponding to true pubkey
         
         //Setup Indices
         i = (data[0] + 1) % ring_size;
