@@ -88,6 +88,10 @@ contract RingMixerV2 {
         success = true;
     }
     
+    function ContractBalance() public view returns(uint256)
+    {
+        return address(this).balance;
+    }
 
     function Withdraw(address[] memory destination, uint256[] memory value, uint256[] memory signature) public returns (bool success) 
     {
