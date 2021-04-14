@@ -90,7 +90,12 @@ contract RingMixerV2 {
     
     function ContractBalance() public view returns(uint256)
     {
-        return address(this).balance;
+        return address(this).balance / 1000000000000000000;
+    }
+    
+    function AccountBalance(address account) public view returns(uint256)
+    {
+        return account.balance / 1000000000000000000;
     }
 
     function Withdraw(address[] memory destination, uint256[] memory value, uint256[] memory signature) public returns (bool success) 
