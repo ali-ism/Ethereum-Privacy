@@ -3,11 +3,6 @@
 //https://github.com/solidblu1992/ethereum/blob/master/SimpleRingMixer/contracts/RingMixerV2.sol
 //Licensed under the GPL-3.0 License .
 //-------------------------------------------------------
-//-------------------------------------------------------
-//This code is (modified) from
-//https://github.com/solidblu1992/ethereum/blob/master/SimpleRingMixer/contracts/RingMixerV2.sol
-//Licensed under the GPL-3.0 License .
-//-------------------------------------------------------
 pragma solidity ^0.5.9;
 
 contract RingMixerV2 {
